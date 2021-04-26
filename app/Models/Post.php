@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    protected $guarded = [];
+ 
     public function user()
     {
-     return $thius->belongsTo(User::class);
+     return $this->belongsTo(User::class);
     }
 }
