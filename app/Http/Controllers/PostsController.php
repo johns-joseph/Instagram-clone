@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use  Intervention\Image\Facades\Image;
 
 use Illuminate\Http\Request;
 use views\posts;
@@ -29,9 +30,12 @@ class PostsController extends Controller
            ]  
          ) ;
 
+         
          $imagePath = request('image') ->store('uploads' , 'public');
-         $image = Image::make(public_path("storage/{$imagePath}"))->fit(!200,1200);
+         $image = Image::make(public_path("storage/{$imagePath}"));
          $image->save();
+
+        
 
          auth()->user()->posts()->create(
              [
@@ -39,6 +43,9 @@ class PostsController extends Controller
                  'image' => $imagePath 
              ]
          );
+
+         // dd($imagePath); test purpose only 
+
      return redirect('/profile/'.auth()->user()->id);
 
     }

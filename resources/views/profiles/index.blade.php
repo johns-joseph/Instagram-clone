@@ -5,7 +5,7 @@
     <div class="row">
       
        <div class="col-3 pe-5">
-        <img src="/svg/gop.jpeg"  style="width:200px;border-radius:50%;" >
+        <img src="/storage/{{$user->profile->image}}"  class="rounded-circle w-100" >
        </div>
        
        <div class="col-9 pt-5" >
@@ -21,7 +21,7 @@
         @can('update' , $user->profile)
         <a href="/profile/{{$user->id}}/edit">Edit profile</a>
         @endcan
-        
+
             <div class="d-flex">
                <div class="pr-3"><strong>{{ $user->posts->count()}}</strong> Posts</div>
                <div class="pr-3"><strong>900</strong> followers</div>
@@ -62,7 +62,7 @@
 
       <div class="col-4"><img style="height:300px;" src="https://static.tvtropes.org/pmwiki/pub/images/blackwidow_endgameprofile.jpg" class="w-100"></div>
 
-
+/storage{{$user->profile->image}}
 
 */
 
