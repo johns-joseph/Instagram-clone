@@ -30,6 +30,9 @@ class PostsController extends Controller
          ) ;
 
          $imagePath = request('image') ->store('uploads' , 'public');
+         $image = Image::make(public_path("storage/{$imagePath}"))->fit(!200,1200);
+         $image->save();
+
          auth()->user()->posts()->create(
              [
                  'caption' => $data['caption'] ,
@@ -39,10 +42,17 @@ class PostsController extends Controller
      return redirect('/profile/'.auth()->user()->id);
 
     }
+    public function show(\App\Models\Post$post)
+    {
+        return view('posts\show' ,compact('post')) ;
+    }
 }
 
 
 /*
+
+ [ 'post' => $post ] = compact('post')
+
       dd(request('image')-> store('uploads' , 'public')); 
          auth()->user()->posts()->create($data);
          dd(request()->all()) ;  // view image in browser  /storage/uploads
