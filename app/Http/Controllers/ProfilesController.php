@@ -14,7 +14,9 @@ class ProfilesController extends Controller
       //return view('home');
 
 //      $user = User::findOrFail($user);   instead of this line we can pass it as function parameter
-      return view('profiles\index' , [  'user' => $user]);
+      $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false ;
+
+      return view('profiles\index' , compact( 'user' , 'follows'));
     }
 
     public function edit(User $user)
@@ -54,7 +56,7 @@ class ProfilesController extends Controller
 
        auth()->user()->profile->update( array_merge(  $data ,  $imageArray ?? [] ));
 
-          //dd( array_merge(  $data ,  $imageArray ?? [] ) );       
+     // dd($data);       
 
       return redirect("/profile/{$user->id}") ;
 
